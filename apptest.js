@@ -300,6 +300,7 @@ function spliceLinksForNode(node) {
 let lastKeyDown = -1;
 
 function keydown() {
+
     d3.event.preventDefault();
 
     if (lastKeyDown !== -1) return;
@@ -379,8 +380,11 @@ function clickButton() {
 
     mycircles.attr('r', 50);
 
-    const mytexts = d3.selectAll("text");
-    mytexts.text("asdfasdfasdfsd");
+    const input = d3.select("input");
+    const mytexts = d3.selectAll("text").filter( t =>
+        t.id === selectedNode.id );
+    const text = document.getElementById('inputtext').value
+    mytexts.text(text);
 
     restart();
 }
@@ -393,7 +397,7 @@ function start(){
 svg.on('mousedown', mousedown)
     .on('mousemove', mousemove)
     .on('mouseup', mouseup);
-d3.select(window)
+d3.select('#graph')
     .on('keydown', keydown)
     .on('keyup', keyup);
 d3.select("button")
