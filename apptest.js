@@ -209,13 +209,6 @@ function restart() {
             mouseupNode = d;
             if (mouseupNode === mousedownNode) {
                 resetMouseVars();
-                const mycircles = d3.selectAll("circle");
-                mycircles.attr('r', 50);
-
-                const mytexts = d3.selectAll("text");
-                mytexts.text("asdfasdfasdfsd");
-
-
                 return;
             }
 
@@ -379,10 +372,16 @@ function clickButton() {
     // insert new node at point
     const point = d3.mouse(this);
     const node = { id: ++lastNodeId, reflexive: false, x: point[0], y: point[1], text:"lalalalal new idea" };
-    for( let i =0; i<nodes.length; i++){
-        nodes[i].text="xxxx";
-    }
-    nodes.push(node);
+
+
+    const mycircles = d3.selectAll("circle").filter( c =>
+        c.id===selectedNode.id );
+
+    mycircles.attr('r', 50);
+
+    const mytexts = d3.selectAll("text");
+    mytexts.text("asdfasdfasdfsd");
+
     restart();
 }
 
